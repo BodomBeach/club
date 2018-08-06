@@ -1,2 +1,23 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+
+<div class="container">
+  <h2>Edit user:<br></h2>
+  <%= form_for @user do |f| %>
+  <div class="form-group">
+    <%= f.label :first_name %>:<br>
+    <%= f.text_field :first_name, placeholder: 'Michael', class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name %>:<br>
+    <%= f.text_field :last_name, placeholder: 'Jackson', class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>:<br>
+    <%= f.text_field :email, placeholder: 'MJ@gmail.com', class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>:<br>
+    <%= f.text_field :password, value: '', placeholder: '*********', class: 'form-control' %><br>
+  </div>
+  <%= f.submit class: "btn btn-primary"%>
+  <% end %>
+</div>

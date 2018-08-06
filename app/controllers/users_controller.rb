@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :club, :show]
-  before_action :correct_user, only: [:edit, :update, :show]
+  before_action :correct_user, only: [:edit, :update]
 
   def home
   end
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(email: params[:user][:email], password: params[:user][:password_digest], password_confirmation: params[:user][:password_digest])
+    @user.update(email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password])
     redirect_to user_path id: @user.id
   end
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     unless @user == current_user
-      flash[:danger] = "You don't have the rights to see this page, stop stalking people"
+      flash[:danger] = "You don't have the rights to do this, please log in again"
       redirect_to(root_url)
     end
   end

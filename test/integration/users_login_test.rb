@@ -60,6 +60,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
     ######################   BEGINNING OF TDD   ########################
 
+    #SHOW FEATURE
+
   test "navbar: show link visible if logged in" do
     get login_path
     post login_path, params: { session: { email: @user1.email, password: 'password' } }
@@ -94,10 +96,25 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
-  test "show page unavailable if not the right person" do
+  #EDIT FEATURE
+
+  test "cannot edit any page if NOT logged in"
+    get edit_user_path id: @user1.id
+    assert_redirected_to '/'
+    assert_not flash.empty?
+  end
+
+  test "if logged in, user can edit his own profile"
     get login_path
     post login_path, params: { session: { email: @user1.email, password: 'password' } }
-    get user_path id: @user2.id
+    get edit_user_path id: @user1.id
+    assert_response :success
+  end
+
+  test "if logged in, cannot edit profile of another user"
+    get login_path
+    post login_path, params: { session: { email: @user1.email, password: 'password' } }
+    get edit_user_path id: @user2.id
     assert_redirected_to '/'
     assert_not flash.empty?
   end
