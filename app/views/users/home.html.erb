@@ -1,0 +1,9 @@
+<h1>Users#home</h1>
+<p>Find me in app/views/users/home.html.erb</p>
+
+<% if !logged_in? %>
+  Bienvenue, pour accéder au club, <%= link_to 'login', login_path %> ou <%= link_to 'signup', new_user_path %>
+<% else %>
+  Bienvenue <%= current_user.first_name %> <%= current_user.last_name %><br>
+  <%= link_to 'Accès au club', users_path, class:'btn btn-success' %>
+<% end %>

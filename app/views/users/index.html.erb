@@ -1,0 +1,24 @@
+<h2> Coco Bongo Club </h2>
+
+<h3> Liste des membres </h3>
+<table class="table">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Titre</td>
+      <td>Contenu</td>
+      <td>anonymous_gossiper</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to 'Voir le user', user_path(user.id)%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,27 @@
+<h1>Users#new</h1>
+<p>Find me in app/views/users/new.html.erb</p>
+
+<div class="container">
+  <h1>Sign up!</h1>
+
+  <%= form_for @user do |f| %>
+  <div class="form-group">
+    <%= f.label :first_name %>:<br>
+    <%= f.text_field :first_name, placeholder: 'Hubert', class: 'form-control w-25' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name %>:<br>
+    <%= f.text_field :last_name, placeholder: 'Bonisseur De La Bath', class: 'form-control w-25' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>:<br>
+    <%= f.text_field :email, placeholder: 'noelflantier@wanadoo.fr', class: 'form-control w-25' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>:<br>
+    <%= f.text_field :password_digest, placeholder: '********', class: 'form-control w-25' %><br>
+  </div>
+  <%# TODO: add password confirmation %>
+  <%= f.submit class: "btn btn-primary"%>
+  <% end %>
+</div>
