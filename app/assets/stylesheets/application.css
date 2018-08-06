@@ -14,11 +14,16 @@
  *= require_self
  */
 
- .main {
-   margin-top: 100px;
- }
+.main {
+  margin-top: 100px;
+}
 
 .club-link {
   font-weight: bold;
   color: pink !important
+}
+
+.profile-link {
+  font-weight: bold;
+  color: teal !important
 }

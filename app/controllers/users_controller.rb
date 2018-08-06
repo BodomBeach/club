@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :club]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :club, :show]
+  before_action :correct_user, only: [:edit, :update, :show]
 
   def home
   end
@@ -54,6 +54,9 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    unless @user == current_user
+      flash[:danger] = "You don't have the rights to see this page, stop stalking people"
+      redirect_to(root_url)
+    end
   end
 end

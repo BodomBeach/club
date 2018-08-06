@@ -26,6 +26,9 @@
             <li class="nav-item active">
               <%= link_to "Coco Bongo Club", users_path, class:'nav-link club-link' %>
             </li>
+            <li class="nav-item active">
+              <%= link_to "Show profile", user_path(id: current_user.id), class:'nav-link profile-link' %>
+            </li>
           <% else %>
             <li class="nav-item active">
               <a class="nav-link" href="<%= login_path %>">Log in<span class="sr-only">(current)</span></a>
