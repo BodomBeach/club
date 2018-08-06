@@ -15,15 +15,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(email: params[:user][:email],
-                     password: params[:user][:password_digest],
-                     password_confirmation: params[:user][:password_digest],
+                     password: params[:user][:password],
+                     password_confirmation: params[:user][:password],
                      first_name: params[:user][:first_name],
                      last_name: params[:user][:last_name])
     if @user.valid?
       @user.save
       log_in(@user)
       flash[:success] = "Bienvenue ma men!"
-      redirect_to root_path id: @user.id
+      redirect_to root_path
     else
       flash.now[:danger] = 'Invalid email (empty or already taken)'
       render 'new'

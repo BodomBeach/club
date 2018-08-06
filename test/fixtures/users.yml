@@ -9,3 +9,9 @@ two:
   first_name: MyString
   last_name: MyString
   email: MyString
+
+michael:
+  first_name: Michael
+  last_name: Hartl
+  email: michael@example.com
+  password_digest: <%= User.digest('password') %>
