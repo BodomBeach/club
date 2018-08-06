@@ -98,20 +98,20 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   #EDIT FEATURE
 
-  test "cannot edit any page if NOT logged in"
+  test "cannot edit any page if NOT logged in" do
     get edit_user_path id: @user1.id
-    assert_redirected_to '/'
+    assert_redirected_to login_path
     assert_not flash.empty?
   end
 
-  test "if logged in, user can edit his own profile"
+  test "if logged in, user can edit his own profile" do
     get login_path
     post login_path, params: { session: { email: @user1.email, password: 'password' } }
     get edit_user_path id: @user1.id
     assert_response :success
   end
 
-  test "if logged in, cannot edit profile of another user"
+  test "if logged in, cannot edit profile of another user" do
     get login_path
     post login_path, params: { session: { email: @user1.email, password: 'password' } }
     get edit_user_path id: @user2.id
@@ -119,4 +119,22 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
+  test "on my profile page, there is an edit button" do
+    get login_path
+    post login_path, params: { session: { email: @user1.email, password: 'password' } }
+    get user_path id: @user1.id
+    assert_select 'a', 'Edit my profile'
+  end
+
+  test "Editing my profile updates information" do
+    get login_path
+    post login_path, params: { session: { email: @user1.email, password: 'password' } }
+    get user_path id: @user1.id
+    patch update_path id: @user1.id, params: {user: {first_name: 'jean', last_name: 'michel', email: 'jean-michel@mail.com', password: 'newpassword'} }
+    assert_redirected_to user_path id: @user1.id
+    follow_redirect!
+    assert_select 'p', 'jean'
+    assert_select 'p', 'michel'
+    assert_select 'p', 'jean-michel@mail.com'
+  end
 end
