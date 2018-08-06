@@ -21,7 +21,10 @@
         <ul class="navbar-nav mr-auto">
           <% if logged_in? %>
             <li class="nav-item active">
-              <%= link_to "Log out", logout_path, method: :delete %>
+              <%= link_to "Log out", logout_path, method: :delete, class:'nav-link' %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "Coco Bongo Club", users_path, class:'nav-link club-link' %>
             </li>
           <% else %>
             <li class="nav-item active">
